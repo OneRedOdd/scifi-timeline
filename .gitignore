@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+# Third-party data downloaded at run time (not redistributed)
+data/external/
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp

@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use this dataset or code, please cite it as below."
+title: "Roads? Where We're Going: the movies promised me flying cars, so I kept score"
+type: dataset
+authors:
+  - family-names: Sharkey
+    given-names: Andi
+date-released: 2026-10-12
+year: 2026
+version: "2026-10-12"
+license: CC-BY-4.0
+repository-code: "https://github.com/OneRedOdd/scifi-timeline"
+url: "https://OneRedOdd.github.io/scifi-timeline/"
+abstract: >-
+  A sourced dataset of 233 released science fiction films (1910-2026) set in a named
+  future year on humanity's current calendar, with release-to-setting gaps, and scored predictions
+  for the 81 films whose setting year has arrived.
+keywords: [science fiction, film, futures, prediction, dataset]
+references:
+  - type: dataset
+    title: "Time Horizons of Futuristic Fiction"
+    authors:
+      - family-names: Wythoff
+        given-names: Grant
+      - family-names: Leane
+        given-names: Theodore
+    year: 2025
+    publisher:
+      name: Post45 Data Collective
+    doi: 10.18737/552626
+    license: CC-BY-4.0

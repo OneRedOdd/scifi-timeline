@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Predictions · Roads? Where We&#x27;re Going</title>
+<meta name="description" content="A sourced timeline of 233 science fiction films and the futures they predicted.">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="index.html">Roads? Where We&#x27;re Going</a><nav><a href="index.html">Home</a><a href="films.html">Films</a><a href="predictions.html" aria-current=page>Predictions</a><a href="series.html">TV series</a><a href="alt-history.html">Alt history</a><a href="comparison.html">Wythoff &amp; Leane</a><a href="methodology.html">Methodology</a><a href="paper.html">Paper</a><a href="downloads.html">Downloads</a></nav></div></header>
+<main class="wrap wide">
+
+<h1>Predictions: what came true?</h1>
+<p class="lede">For the 81 films whose setting year has already come round, I picked out the main on-screen technology and society forecasts. Each one is scored <span class="v-true">came true</span>, <span class="v-sort">sort of</span> or <span class="v-no">didn't</span>, judged by the film's own year. That's 266 rows, and 220 of them are scored. The rest are left out because they're plot devices, or because the thing already existed when the film came out.</p>
+<div class="cards">
+<div class="card"><div class="num">25</div><div class="lbl">came true (11.4%)</div></div>
+<div class="card"><div class="num">39</div><div class="lbl">sort of (17.7%)</div></div>
+<div class="card"><div class="num">156</div><div class="lbl">didn't (70.9%)</div></div>
+<div class="card"><div class="num">20.2%</div><div class="lbl">score, with sort of counting as half</div></div>
+</div>
+<h2>By theme</h2>
+<table><thead><tr><th>Theme</th><th>Predictions</th><th>Films</th><th>Came true</th><th>Score (sort of = half)</th></tr></thead><tbody><tr><td>communication</td><td class="num">20</td><td class="num">10</td><td class="num">45%</td><td class="num">57.5%</td></tr><tr><td>computing/AI</td><td class="num">33</td><td class="num">21</td><td class="num">15%</td><td class="num">30.3%</td></tr><tr><td>other</td><td class="num">5</td><td class="num">5</td><td class="num">0%</td><td class="num">30.0%</td></tr><tr><td>environment</td><td class="num">17</td><td class="num">13</td><td class="num">6%</td><td class="num">17.6%</td></tr><tr><td>medicine/biotech</td><td class="num">27</td><td class="num">21</td><td class="num">4%</td><td class="num">14.8%</td></tr><tr><td>space</td><td class="num">42</td><td class="num">18</td><td class="num">10%</td><td class="num">14.3%</td></tr><tr><td>transport</td><td class="num">12</td><td class="num">10</td><td class="num">8%</td><td class="num">12.5%</td></tr><tr><td>society/politics</td><td class="num">64</td><td class="num">42</td><td class="num">6%</td><td class="num">10.9%</td></tr></tbody></table>
+<p class="count">Only communication stands out once you correct for multiple comparisons. Below that the ranking is mostly noise, so I wouldn't lean on it.</p>
+<p>And if you're wondering where your flying car is: every flying-car forecast I scored is a miss. There's a bit more on that in the paper's <a href="paper.html#82-wheres-my-flying-car-function-versus-form">"Where's my flying car?"</a> section.</p>
+<h2>Headline films</h2>
+<table><thead><tr><th>Film</th><th>Came true</th><th>Sort of</th><th>Didn't</th><th>Score</th></tr></thead><tbody><tr><td>2001: A Space Odyssey</td><td class="num">2</td><td class="num">3</td><td class="num">5</td><td class="num">35%</td></tr><tr><td>Blade Runner</td><td class="num">3</td><td class="num">1</td><td class="num">5</td><td class="num">39%</td></tr><tr><td>Back to the Future Part II</td><td class="num">4</td><td class="num">1</td><td class="num">5</td><td class="num">45%</td></tr></tbody></table>
+<h2>Did a bleak future make a better guess?</h2>
+<figure><img src="charts/tone_vs_accuracy.png" alt="Chart comparing prediction scores of dystopian and non-dystopian films under Wikipedia and strict labels, and the dystopian share by decade." loading="lazy"><figcaption>Not really. Tone made no significant difference to accuracy under either labelling rule. The details are in <a href="findings/tone_analysis.md">tone_analysis.md</a>.</figcaption></figure>
+<div class="caveat"><strong>Before you quote any of this</strong>
+<ul>
+<li>These are well-known films that name a year, not a random sample of science fiction. So nothing here means "science fiction gets X% right".</li>
+<li>I did the scoring myself and checked my work twice. There's no second scorer, though, so there's no inter-rater reliability statistic.</li>
+<li>Gap vs accuracy: films set further ahead did score slightly better, but that largely fades once you account for the theme of the prediction (audit v1, 164-film version; I haven't rerun it on 233 yet). So it's not "no link", but it's not evidence that looking further ahead makes a film more accurate either.</li>
+<li>"Dystopias are rising" only holds on Wikipedia's fairly generous labels (p = 0.012). On the stricter on-screen rule the trend isn't significant (p = 0.24).</li>
+<li>Most theme and tone groups have fewer than 30 predictions, so I wouldn't read much into the small ones.</li>
+</ul></div>
+<h2>Every prediction row</h2>
+<p><a href="data/predictions.csv">Download predictions.csv</a></p>
+<div class="csvtable" data-src="data/predictions.csv" data-cols="title,release_year,setting_year,theme,prediction,verdict,scored,exclusion_reason,reason,audit_note,source_url"
+ data-filters="theme,verdict,scored" data-num="release_year,setting_year" data-long="prediction,reason" data-sort="release_year"></div>
+
+</main>
+<footer class="site"><div class="wrap">Andi Sharkey, 2026. Data and text <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>; code MIT.
+Comparison data: Wythoff &amp; Leane (2025), Post45 Data Collective, <a href="https://doi.org/10.18737/552626">doi:10.18737/552626</a> (CC BY 4.0).</div></footer>
+<script src="assets/table.js"></script>
+</body>
+</html>

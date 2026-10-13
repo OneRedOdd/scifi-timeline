@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Methodology · Roads? Where We&#x27;re Going</title>
+<meta name="description" content="A sourced timeline of 233 science fiction films and the futures they predicted.">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="index.html">Roads? Where We&#x27;re Going</a><nav><a href="index.html">Home</a><a href="films.html">Films</a><a href="predictions.html">Predictions</a><a href="series.html">TV series</a><a href="alt-history.html">Alt history</a><a href="comparison.html">Wythoff &amp; Leane</a><a href="methodology.html" aria-current=page>Methodology</a><a href="paper.html">Paper</a><a href="downloads.html">Downloads</a></nav></div></header>
+<main class="wrap">
+
+<h1>Methodology</h1>
+<h2>Which films count</h2>
+<p>I set the rules early and stuck to them for every film I added.</p>
+<ul>
+<li>Earth's timeline and humanity's current calendar only. A film has to be set in a named future year on humanity's current calendar, so galaxy-far-away settings like <em>Star Wars</em> are out, and so are invented calendars.</li>
+<li>Released films only. Streaming-first and streaming-only releases count (15 films, flagged). Unreleased and festival-only titles don't.</li>
+<li>Shorts and serials only get in where they fill an otherwise empty early release year.</li>
+<li>No alternate history (parked <a href="alt-history.html">for later</a>) and no television (<a href="series.html">94 series set aside</a>).</li>
+<li>A sourced year, not a decade. Decades, centuries and years that only turn up in a Wikipedia category don't count.</li>
+</ul>
+<h2>Setting year and gap</h2>
+<p>Setting years come from on-screen dates, the film's Wikipedia plot, or other cited sources (AFI Catalog, BFI, SFE, EOFFTV, DEFA and press coverage). Every row has a <code>source_url</code> and a quote in <code>notes</code>. Sometimes the year is ambiguous, derived, or comes from tie-in or official material rather than the screen (<em>Alien</em>'s 2122, for example). Then I've flagged the title with an asterisk rather than guess. 49 of 233 are flagged.</p>
+<p>The gap is simply setting year minus release year. I report the median, because a few far-future films make the mean meaningless. <em>The Time Machine</em>, for one, is set 800,741 years ahead.</p>
+<h2>Scoring predictions</h2>
+<p>I only scored films whose setting year is 2026 or earlier (81 films). For each one I took the main on-screen technology and society forecasts, wrote each as a claim about the setting year and gave it a theme. Then it's came true, sort of or didn't, judged by the film's own setting year. If something turned up later than that, it counts as didn't.</p>
+<p>Some things I left out rather than scored. That means anything that already existed when the film came out, and plot devices (time travel, aliens, monsters, the supernatural, alternate history). The headline score counts sort of as half. Films I only know from synopses are marked THIN, and I also give the results without them.</p>
+<h2>Tone labels</h2>
+<p>Each film has two labels. One is rule-based, from Wikipedia's short description, lead and categories. The other is a stricter on-screen label: a film only counts as dystopian if society itself is oppressive or collapsed for most of the runtime. For the tests I used Fisher's exact test, film-level Mann–Whitney and permutation tests, and a theme-adjusted GEE model clustered by film.</p>
+<h2>Checking my work</h2>
+<p>I didn't want to take my own scoring on trust, so I went back and checked my work twice.</p>
+<ul>
+<li>First round of checks (audit v1, 164-film version): I re-scored a random 40 predictions from scratch (39 agreed), re-checked every hit and partial, recomputed every published number, re-labelled tone with the strict rule and tested gap vs accuracy. That showed some hits weren't real forecasts, moved <em>2009: Lost Memories</em> to alternate history, and knocked <em>Back to the Future Part II</em> down from 50% to 45%. "About 1 in 5" held up (21.5% after fixes). <a href="findings/audit_findings.md">audit_findings.md</a></li>
+<li>Second round (audit v2): I went through all 44 predictions added when the list grew to 233 films, line by line. 3 changed, and the headline moved by a tenth of a point. <a href="findings/audit_findings_v2.md">audit_findings_v2.md</a></li>
+</ul>
+<div class="caveat"><strong>Before you quote any of this</strong>
+<ul>
+<li>These are well-known films that name a year, not a random sample of science fiction. So nothing here means "science fiction gets X% right".</li>
+<li>I did the scoring myself and checked my work twice. There's no second scorer, though, so there's no inter-rater reliability statistic.</li>
+<li>Gap vs accuracy: films set further ahead did score slightly better, but that largely fades once you account for the theme of the prediction (audit v1, 164-film version; I haven't rerun it on 233 yet). So it's not "no link", but it's not evidence that looking further ahead makes a film more accurate either.</li>
+<li>"Dystopias are rising" only holds on Wikipedia's fairly generous labels (p = 0.012). On the stricter on-screen rule the trend isn't significant (p = 0.24).</li>
+<li>Most theme and tone groups have fewer than 30 predictions, so I wouldn't read much into the small ones.</li>
+</ul></div>
+<p>All the numbers are in <a href="findings/stats_summary.md">stats_summary.md</a>, and the column definitions are in the <a href="data/README.md">codebook</a>.</p>
+
+</main>
+<footer class="site"><div class="wrap">Andi Sharkey, 2026. Data and text <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>; code MIT.
+Comparison data: Wythoff &amp; Leane (2025), Post45 Data Collective, <a href="https://doi.org/10.18737/552626">doi:10.18737/552626</a> (CC BY 4.0).</div></footer>
+
+</body>
+</html>

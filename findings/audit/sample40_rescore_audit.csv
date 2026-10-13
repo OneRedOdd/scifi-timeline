@@ -1,0 +1,41 @@
+row,title,setting_year,prediction,existing,audit,agree,audit_reason
+5,The Last Man on Earth*,1950,A disease ('masculitis') kills almost all men,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+12,High Treason*,1940,"A federal ""United States of Europe""",sort of,didn't,False,"Federal United States of Europe did not exist by 1940 (EEC 1957, EU 1993, not federal). Under the stated rule (judge vs setting year) this is didn't."
+15,Just Imagine,1980,Numbers replace names,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+24,The Shining Future*,1960,Family rocket planes for everyday travel,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+34,Project Moonbase,1970,US Space Force,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+37,King Dinosaur,1960,A wandering planet enters the Solar System,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+42,It! The Terror from Beyond Space,1973,Crewed missions to Mars by 1973,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+46,Queen of Outer Space,1985,Crewed flight to Venus,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+52,Battle in Outer Space,1965,Crewed Moon mission in 1965,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+56,Beyond the Time Barrier,2024,Survivors live in an underground citadel,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+65,The Last Man on Earth,1968,Society and government collapse completely,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+71,2001: A Space Odyssey,2001,Crewed mission to Jupiter,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+76,Time of Roses,2012,Finland has become a classless meritocracy,didn't,didn't (borderline),True,"Finland is not classless; 'sort of' arguable given low inequality, but didn't is defensible."
+80,Crimes of the Future,1997,Society reorganised around clinics and institutes for the plague,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+82,Escape from the Planet of the Apes,1973,A presidential commission and media frenzy over the visitors,didn't,exclude,False,Depends entirely on the fictional premise (talking apes from the future); not a real-world forecast. Scoring it 'didn't' deflates the rate.
+93,Soylent Green,2022,New York has 40 million people,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+94,Soylent Green,2022,Most people live on rationed processed food wafers,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+100,Rollerball*,2018,Corporations replace nations,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+110,Libra*,2003,World government micromanages Earth,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+114,Escape from New York,1997,Manhattan walled off as a maximum-security prison,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+115,Escape from New York,1997,War between the US and a China–USSR alliance,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+119,Blade Runner,2019,Off-world colonies,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+122,Blade Runner,2019,Esper: zoom and see round corners in a 2D photo,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+126,"2019, After the Fall of New York",2019,World War III nuclear holocaust in 1999,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+132,2010: The Year We Make Contact,2010,Life on Europa,didn't,"didn't (agree, note)",True,Not 'disproved' - simply not found by 2010; fine under the rule.
+136,The Running Man,2017,Broadcaster digitally fakes a person's face and death on TV,came true,"came true (keep, reframe)",True,Film shows broadcaster digitally mapping faces onto stunt doubles and broadcasting a faked death (Cinemablend/befores&afters). 'Deepfakes' named on Reddit late 2017. Fair as capability; the broadcaster misuse did not happen; 'the very year' is coincidence.
+143,Akira,2019,Tokyo destroyed in 1988 and a world war,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+153,Back to the Future Part II,2015,Flying cars,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+164,Terminator 2: Judgment Day*,1995,Liquid-metal shape-shifting robot,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+170,Fortress,2017,Implanted 'intestinator' pain devices,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+175,Strange Days,1999,SQUID: recording and replaying memories and sensations,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+186,The Postman,2013,Collapse of the United States into pre-industrial society,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+193,2009: Lost Memories,2009,Korea still under Japanese rule,didn't,exclude,False,Alternate-history premise (Korea under Japanese rule). The film arguably fails the 'our timeline' inclusion rule; better moved to the alt-history set.
+194,2009: Lost Memories,2009,Japan is the world's second power after the US,sort of,exclude (or sort of),False,"Premise-dependent; outside the premise, Japan was indeed the No. 2 economy in 2009 (China overtook in 2010), so 'sort of' is defensible if kept."
+206,Terminator Salvation,2018,Human–machine hybrid soldier,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+207,Terminator Salvation,2018,Autonomous flying hunter-killer drones,sort of,sort of (agree),True,"Military drones widespread by 2018 (MQ-9), autonomous hunting limited."
+211,Repo Men,2025,Organs repossessed for non-payment,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+214,Pacific Rim*,2025,Giant piloted mechs (Jaegers) with a neural link,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+217,Dawn of the Planet of the Apes,2026,Apes with enhanced intelligence,didn't,didn't,True,Agree: no evidence it happened by the setting year.
+218,Dawn of the Planet of the Apes,2026,Survivors scavenge in ruined San Francisco,didn't,didn't,True,Agree: no evidence it happened by the setting year.

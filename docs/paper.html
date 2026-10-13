@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paper · Roads? Where We&#x27;re Going</title>
+<meta name="description" content="Roads? Where We&#x27;re Going: the movies promised me flying cars, so I kept score.">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="index.html">Roads? Where We&#x27;re Going</a><nav><a href="index.html">Home</a><a href="films.html">Films</a><a href="predictions.html">Predictions</a><a href="series.html">TV series</a><a href="alt-history.html">Alt history</a><a href="comparison.html">Wythoff &amp; Leane</a><a href="methodology.html">Methodology</a><a href="paper.html" aria-current=page>Paper</a><a href="downloads.html">Downloads</a></nav></div></header>
+<main class="wrap">
+
+<article class="paper">
+<p><a class="btn" href="paper/paper.pdf">PDF</a><a class="btn" href="paper/paper.docx">Word (.docx)</a><a class="btn" href="paper/paper.md">Markdown source</a></p>
+<h1>Roads? Where We&#x27;re Going: the movies promised me flying cars, so I kept score</h1>
+<p class="lede">Andi Sharkey, October 2026.</p>
+<p class="note">On this site, the data files are on the <a href="downloads.html">Downloads</a> page.</p>
+<h1 id="abstract">Abstract</h1>
+<p>Science fiction films often put a date on the future: 2001, 2015, 2019, 2122. I built a dataset by hand of 233 released films, from 1910 to 2026, that set their action in a named future year on humanity's current calendar. Then I used it to ask two simple questions. How far ahead do films look? And when the future they named arrives, how much of what they showed has actually happened? The median film is set 34 years after its release. Eighty-one of the 233 films (35%) are set in a year that has now arrived. From those films I scored 220 on-screen predictions against each film's own setting year. Only 11.4% came true outright, roughly 1 in 9. Counting near-misses as half, the score is 20.2%, roughly 1 in 5. It stays close to that however I slice it: 21.8% without the films whose evidence is thin, and 16.9% when every film counts equally. Communication technology does far better than any other theme (57.5%). Gadget forecasts as a whole score 40.6%, but only 2 of 42 forecasts of plague, war, collapse or police states came true. I find no significant link between a film's tone and its accuracy. The apparent rise of dystopian films is significant only under Wikipedia's labels, not under a stricter on-screen rule. A comparison with Wythoff and Leane's (2025) dataset of futuristic fiction shows that the two projects date shared films almost identically. They differ mainly in which films they select. All my data, notes and charts are in the repo.</p>
+<h1 id="1-introduction">1. Introduction</h1>
+<p>When <em>Back to the Future Part II</em> came out in 1989, it sent Marty McFly to October 2015. That date has passed. So have the 2019 of <em>Blade Runner</em> and <em>Akira</em>, the 2001 of Kubrick's space odyssey, and the 2017 of <em>The Running Man</em>. Each of these films made a dated promise, and the dates have now caught up with them. That gives me an unusual chance to check a work of fiction against the world it imagined.</p>
+<p>Two separate questions are tangled together here. The first is about <em>look-ahead</em>: when film-makers imagine the future, how far ahead do they put it, and has that distance changed? The second is about <em>accuracy</em>: once the stated year arrives, how much of the imagined world turned out to be real? The first question needs only a release year and a setting year. The second needs a judgement about each thing a film shows. Was a video call, a flying car or a world government really part of life in the year the film named?</p>
+<p>Here's the dataset I built to answer both questions, the rules I used, how I scored the predictions, and what I found. The project began as an infographic, a timeline running from each film's release to its setting year (Figure 1). It grew through three rounds of expansion, and I checked my own work twice along the way. It's a spare-time project, not a forecasting study: I wanted to see what a carefully sourced list of dated film futures looks like, and how much weight its numbers can bear.</p>
+<p>Three caveats shape everything that follows. The films are well-known titles that name a year, not a random sample, so nothing here means "science fiction gets X% right". I scored every prediction myself and then checked it; nobody scored it twice blind. And deciding <em>which</em> on-screen details count as predictions matters at least as much as the verdicts (Section 5).</p>
+<figure><img src="paper/figures/timeline_top.png" alt="Figure 1. Top section of the main infographic (timeline.png). Each bar runs from release year (yellow) to setting year. Near futures (up to 2125) are blue on a linear scale and far futures are orange on a compressed scale. Titles in lilac and marked with an asterisk have an ambiguous, derived or off-screen setting year. Badges give the country for films made outside the UK and US. The full chart covers all 233 films." loading="lazy"><figcaption>Figure 1. Top section of the main infographic (<code>timeline.png</code>). Each bar runs from release year (yellow) to setting year. Near futures (up to 2125) are blue on a linear scale and far futures are orange on a compressed scale. Titles in lilac and marked with an asterisk have an ambiguous, derived or off-screen setting year. Badges give the country for films made outside the UK and US. The full chart covers all 233 films.</figcaption></figure>
+
+<h1 id="2-related-work">2. Related work</h1>
+<p>The closest thing I found is Wythoff and Leane's <em>Time Horizons of Futuristic Fiction</em> (2025), published by the Post45 Data Collective. It is a hand-verified dataset of 2,552 English-language works set in the future: 960 films, 377 television series or episodes, and novels, games, comics and other media. The works are drawn from Wikipedia and Wikidata, and each has a release year, a setting year and the distance between them. Its main criterion is the same as the one used here: a work set at least one year after its release. Its rule for works that span several years (a main year where the plot makes one obvious, otherwise the median of the years shown) is close to mine. Wythoff and Leane do not score accuracy or tone. They do copy Wikipedia's "future now past" notes into an unscored <code>predictions</code> column. Section 7 compares the two datasets directly.</p>
+<p>On accuracy, the nearest academic study is Xu et al. (2021). Three raters scored 3,095 speculative technologies from the Technovelgy database, which is mostly written fiction, against a rubric. They report that 45% were judged "realised" by at least one rater (Fleiss' κ = 0.57), with an average of about 45 years to realisation. Their measure is "ever realised", whereas the measure here is "true by the stated year", and their unit is the technology, not the film. Even so, their use of several raters is the obvious model for improving the reliability of the present study. Arb Research's scoring of the non-fiction forecasts of Asimov, Heinlein and Clarke uses a correct/partial/wrong scheme much like mine. On strict technology accuracy it reports 57%, 48% and 36% respectively. Larson (2008) is closer in medium but much smaller. It is a content analysis of computer technology in ten popular science fiction films, including <em>2001</em> and <em>Blade Runner</em>, and it found that on-screen computers mostly reflect the technology of the year the film was made.</p>
+<p>On tone, The Pudding's "Who killed the world?" (Chang, 2024) analysed the top 200 IMDb science fiction films and television shows of each decade from the 1950s. It found that recent science fiction is far more often set in dystopian or post-apocalyptic worlds. Its coding was done with a large language model and spot-checked by hand, and its sample includes works not set in the future. Artut (2017) reached a similar "dystopias dominate" conclusion with crowd-sourced labels. Bina et al. (2017) treat utopian and dystopian film and fiction as a lens on Europe's "Grand Societal Challenges". Theirs is a qualitative study, but it asks a question related to mine: what do imagined futures say about where we're all headed?</p>
+<p>Two further strands supply hypotheses and caveats. Hollinger (2006) argued that science fiction has moved towards near-future or "present-tense" settings as accelerating change makes far futures harder to imagine. Wythoff and Leane flag this as an open question, and it can be tested with gap-by-decade data (Section 7). Kirby (2010) showed that film-makers and scientific consultants sometimes place "diegetic prototypes" in films deliberately, to build demand for technologies under development. So some "correct predictions" may be partly self-fulfilling, a point the interface-design literature also makes (Shedroff and Noessel, 2012; Jordan et al., 2018; Russell and Yarosh, 2018).</p>
+<p>Informal versions include io9's 2012 chart of near, middle and far futures by decade, Patrick Coston's web table, and infographics by Dan Meth and Glow New Media. Wikipedia's lists of films set in the future and of stories set in a future now past are the main raw source for this project and for Wythoff and Leane's. As far as the literature search for this project could establish, no published work combines all three elements studied here: the release-to-setting gap, systematic scoring of on-screen predictions against the stated year, and a test of whether tone relates to accuracy.</p>
+<h1 id="3-data-and-inclusion-rules">3. Data and inclusion rules</h1>
+<h2 id="31-scope">3.1 Scope</h2>
+<p>The unit of the dataset is a released film set in a named year on humanity's current calendar. The current version (<code>films.csv</code>) holds 233 films, released between 1910 and 2026. Of these, 226 are features, six are shorts and one is a serial. By release route, 217 were theatrical, 15 went to streaming first or only, and one was non-theatrical. 124 are US-only productions, 39 involve the UK and 53 involve neither the US nor the UK. Release decades are uneven: three to five films a decade before 1950, rising to 48 in 2020–26.</p>
+<h2 id="32-inclusion-and-exclusion-rules">3.2 Inclusion and exclusion rules</h2>
+<p>I fixed the rules early and applied them to every addition:</p>
+<ul>
+<li><strong>Earth's timeline, humanity's current calendar.</strong> The film must be set in a future year on humanity's current calendar. Galaxy-far-away settings such as <em>Star Wars</em> are out. Invented or in-universe calendars are excluded unless an official source converts them. Star Trek is included as a judgement call, as Earth's future on humanity's current calendar; so are off-world films dated on humanity's current calendar, such as <em>Planet of the Apes</em> (2001, set in 5021).</li>
+<li><strong>Released films only.</strong> Unreleased titles (<em>Avengers: Doomsday</em>, due December 2026) and festival-only screenings are excluded.</li>
+<li><strong>Streaming counts.</strong> Films released first or only on streaming services are included and flagged (15 films, e.g. <em>Archive</em>, <em>The Midnight Sky</em>, <em>Crater</em> and <em>Jackpot!</em>).</li>
+<li><strong>Shorts only to fill gaps.</strong> Shorts and serials are included only where they fill a release year that would otherwise be empty. The six shorts date from 1910, 1911, 1944, 1949, 1967 and 1978, and the serial (<em>Buck Rogers</em>) from 1939; <em>Voices of a Distant Star</em> (2002), a 25-minute short, was rejected.</li>
+<li><strong>No alternate history.</strong> Films whose world breaks away from real history before release break the "real timeline" rule. Alternate-history settings did turn up in the search. They were excluded from the 233 and are parked in <code>alt_history_candidates.csv</code> for later; <em>2009: Lost Memories</em>, set in a Korea still under Japanese rule, is the example moved out after the first audit.</li>
+<li><strong>Films, not television.</strong> Television series were set aside too. A separate chart of 94 series exists in <code>series/</code> (<code>series_timeline.png</code>), and the series could be scored the same way later.</li>
+<li><strong>A sourced year, not a decade.</strong> Decades ("2040s"), centuries, and years found only in a Wikipedia category are grounds for rejection.</li>
+</ul>
+<p><code>data/rejected_candidates.csv</code> records 25 candidates rejected under these rules. <em>Forbidden Planet</em> (1956) is the best-known. Its opening narration gives only "by 2200" as backstory. The often-quoted 2257 comes from an old copy of the Wikipedia plot, with no official source, and Wikipedia now says "23rd century". The film is therefore excluded rather than assigned a year.</p>
+<h2 id="33-sourcing-the-setting-year">3.3 Sourcing the setting year</h2>
+<p>Setting years follow a rough hierarchy of evidence. Highest is a date shown or spoken on screen, or stated directly in a well-maintained plot summary: 223 of the 233 source links point to English Wikipedia, usually to a plot sentence such as "In 2019 Los Angeles". Next come official or licensed sources: tie-in books, studio press notes, title cards in authorised re-releases. Then come years <em>derived</em> from an on-screen interval. Reference works (the <em>Encyclopedia of Science Fiction</em>, EOFFTV, the AFI Catalog, BFI, Screen Rant, the Smithsonian) fill gaps where Wikipedia is silent or contradictory. A fan wiki on its own is not enough: the 1977 <em>Space Battleship Yamato</em> was rejected because only a fan wiki gives its year. Where a film spans several years, the <em>main</em> future setting is used, not a median. For example, <em>Star Trek: First Contact</em> is dated by its main Earth action in 2063.</p>
+<h2 id="34-flagging-rather-than-resolving-ambiguous-years">3.4 Flagging rather than resolving ambiguous years</h2>
+<p>Forty-nine films (21%) carry an asterisk in the title. The asterisk means the setting year is ambiguous, derived, taken from an off-screen source, or contested between sources. Each flag is explained in the <code>notes</code> column. The policy is to record the best-supported year <em>and</em> the doubt, rather than to resolve the conflict silently. Examples:</p>
+<ul>
+<li><strong><em>Metropolis</em></strong> <strong>(1927 → 2026).</strong> Wikipedia states that the film itself gives no year. 2026 comes from the 1963 Ace Books edition and the title card of Giorgio Moroder's 1984 re-scored version. Historians Eisner and Jensen place the film around 2000, and Thea von Harbou said "no particular place or time". The 2026 is kept and flagged.</li>
+<li><strong><em>The Fifth Element</em></strong> <strong>(1997 → 2263).</strong> There is a known three-way conflict. Korben's alarm clock gives 2263, Pathé's 1997 DVD notes say 2257, and Besson's book says 2259. The dataset uses 2263, and Wythoff and Leane use 2259.</li>
+<li><strong><em>WALL-E</em></strong> <strong>(2008 → 2805).</strong> The film has no caption. The year is derived from the captains' wall and a "700th anniversary", supported by the official guide. The soundtrack includes a track titled "2815 A.D.".</li>
+<li><strong><em>Alien</em></strong> <strong>(1979 → 2122).</strong> The screen shows only "June 3". The year comes from a licensed technical manual and is consistent with <em>Alien: Romulus</em>. <em>Aliens</em> (1986 → 2179) is derived from Ripley's 57 years adrift.</li>
+<li><strong><em>Interstellar</em></strong> <strong>(2014 → 2067).</strong> The year comes from official tie-in material, not from the screen, and the story continues to about 2156.</li>
+</ul>
+<p>The most common flag types are multi-year spans, derived years and outright ambiguity. Two films are extreme outliers: <em>The Time Machine</em> (1960) and its 2002 remake, both set in 802,701. With <em>Vampire Hunter D</em> (12,090), they are drawn off-scale on the chart.</p>
+<h2 id="35-how-the-dataset-grew">3.5 How the dataset grew</h2>
+<p>The list grew in stages to 164 films. The first audit moved <em>2009: Lost Memories</em> to the alternate-history file, leaving 163. The latest expansion (the 233-film update) added 70 films, bringing the total to 233.</p>
+<ul>
+<li><strong>51 films from Wythoff and Leane's dataset.</strong> These came from a curated shortlist of their films that were missing from mine (<code>wythoff_leane/add_candidates_shortlist.csv</code>). Every candidate was marked "from W&amp;L, to verify" and re-sourced before entry. Three of them were films I had earlier excluded for lacking a stated year, and they are now included with a flag: <em>Alien</em> (official source, not on screen), <em>Aliens</em> (derived) and <em>Interstellar</em> (official tie-in, not on screen). <em>Forbidden Planet</em>, the fourth such film, stayed out.</li>
+<li><strong>19 films from a sweep of 2021–26 releases.</strong> This sweep covered the years after Wythoff and Leane's February 2025 scrape and the thin years just before it. Five of the 19 are streaming releases: <em>Dikkiloona</em>, <em>Robots</em>, <em>Crater</em>, <em>Jackpot!</em> and <em>Absolute Dominion</em>. Seventeen sweep candidates were rejected, most often because their year existed only in a Wikipedia category.</li>
+</ul>
+<h2 id="36-codebook">3.6 Codebook</h2>
+<p>The release consists of two linked tables. <code>films.csv</code> has one row per film (Table 1). <code>predictions.csv</code> has one row per on-screen prediction (Table 2). The tables join on <code>title</code> plus <code>release_year</code>.</p>
+<p>Table 1. Columns of <code>films.csv</code> (233 rows).</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Values</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>title</code></td>
+<td>text</td>
+<td>Film title. A trailing asterisk flags an ambiguous, derived or off-screen setting year.</td>
+</tr>
+<tr>
+<td><code>release_year</code></td>
+<td>integer</td>
+<td>Year of first release.</td>
+</tr>
+<tr>
+<td><code>setting_year</code></td>
+<td>integer</td>
+<td>Main future year of the action, on humanity's current calendar.</td>
+</tr>
+<tr>
+<td><code>gap_years</code></td>
+<td>integer</td>
+<td><code>setting_year</code> minus <code>release_year</code>.</td>
+</tr>
+<tr>
+<td><code>format</code></td>
+<td>feature / short / serial</td>
+<td>Format of the work.</td>
+</tr>
+<tr>
+<td><code>release_type</code></td>
+<td>theatrical / streaming / non-theatrical</td>
+<td>First release route.</td>
+</tr>
+<tr>
+<td><code>country</code></td>
+<td>text</td>
+<td>Production countries, separated by semicolons, first-listed first.</td>
+</tr>
+<tr>
+<td><code>director</code></td>
+<td>text</td>
+<td>Director or directors.</td>
+</tr>
+<tr>
+<td><code>source_url</code></td>
+<td>URL</td>
+<td>Main source for the setting year.</td>
+</tr>
+<tr>
+<td><code>notes</code></td>
+<td>text</td>
+<td>Sourcing evidence. Flagged films explain the flag (FLAG, AMBIGUOUS).</td>
+</tr>
+<tr>
+<td><code>prediction_notes</code></td>
+<td>text</td>
+<td>Summary of the film's scored predictions, if any.</td>
+</tr>
+<tr>
+<td><code>tone</code></td>
+<td>dystopian / neutral / mixed / utopian / unclear</td>
+<td>Rule-based label from Wikipedia wording and categories.</td>
+</tr>
+<tr>
+<td><code>tone_source</code></td>
+<td>text</td>
+<td>Evidence for <code>tone</code>, with link.</td>
+</tr>
+<tr>
+<td><code>tone_strict</code></td>
+<td>dystopian / not dystopian</td>
+<td>Stricter on-screen label (Section 4.4).</td>
+</tr>
+<tr>
+<td><code>tone_strict_basis</code></td>
+<td>text</td>
+<td>Who assigned the strict label. Borderline calls are marked "b:".</td>
+</tr>
+</tbody>
+</table>
+<p>Table 2. Columns of <code>predictions.csv</code> (266 rows for films in the list).</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Values</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>title</code>, <code>release_year</code>, <code>setting_year</code></td>
+<td>as above</td>
+<td>Link to <code>films.csv</code>.</td>
+</tr>
+<tr>
+<td><code>theme</code></td>
+<td>8 categories</td>
+<td>communication, computing/AI, environment, medicine/biotech, space, transport, society/politics, other.</td>
+</tr>
+<tr>
+<td><code>prediction</code></td>
+<td>text</td>
+<td>The on-screen element, phrased as a claim about the setting year.</td>
+</tr>
+<tr>
+<td><code>verdict</code></td>
+<td>came true / sort of / didn't</td>
+<td>Final verdict (after my checks).</td>
+</tr>
+<tr>
+<td><code>verdict_original</code></td>
+<td>as above</td>
+<td>Verdict before the audits.</td>
+</tr>
+<tr>
+<td><code>scored</code></td>
+<td>yes / no</td>
+<td>Whether the row counts towards scores.</td>
+</tr>
+<tr>
+<td><code>exclusion_reason</code></td>
+<td>text</td>
+<td>Why a row is not scored: a premise device, or the thing already existed at release.</td>
+</tr>
+<tr>
+<td><code>audit_note</code></td>
+<td>text</td>
+<td>Changes made by audit v1 or v2.</td>
+</tr>
+<tr>
+<td><code>reason</code></td>
+<td>text</td>
+<td>Evidence for the verdict. "THIN" marks films known only from synopses.</td>
+</tr>
+<tr>
+<td><code>source_url</code></td>
+<td>URL</td>
+<td>Source for the on-screen element.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="4-method">4. Method</h1>
+<h2 id="41-look-ahead-the-gap">4.1 Look-ahead: the gap</h2>
+<p>The gap is simply the setting year minus the release year. The distribution has a very long tail: two films are set in 802,701 and one in 12,090. So the mean is meaningless (7,037.9 years across all 233), and the median is the headline measure throughout. Shares within 10, 50 and 100 years are reported alongside it, so that results can be compared with Wythoff and Leane.</p>
+<h2 id="42-accuracy-scoring-predictions">4.2 Accuracy: scoring predictions</h2>
+<p>Only the 81 films whose setting year has arrived (2026 or earlier) can be scored. For each, I listed the main technological and social elements shown on screen, phrased as claims about the setting year, and gave each a verdict:</p>
+<ul>
+<li><strong>came true</strong>: the thing existed and was in real use by the film's setting year;</li>
+<li><strong>sort of</strong>: a recognisable but partial, limited or rare version existed by then;</li>
+<li><strong>didn't</strong>: it did not exist by the setting year.</li>
+</ul>
+<p><strong>Each prediction is judged by the film's own year.</strong> Anything that arrived later counts as "didn't". The self-lacing shoes of <em>Back to the Future Part II</em>, which arrived in 2016, a year after the film's 2015, are scored as a miss. This rule is strict by design. The first audit estimated that counting anything that came true by 2026 would raise the score to about 27%.</p>
+<p>Two kinds of row are kept in the file but <strong>excluded from scoring</strong>:</p>
+<ol>
+<li><strong>Things that already existed at release.</strong> Showing a woman mayor in 1910, or a crewed space station in 1977, is not a forecast. There are 10 such rows.</li>
+<li><strong>Premise devices.</strong> Time travel, aliens, monsters, the supernatural, psychic powers and alternate history are the conditions of the story, not forecasts of the real world. Scoring them would simply penalise fantasy premises. There are 36 such rows.</li>
+</ol>
+<p>That leaves 220 scored predictions from 75 films. (Six films whose year has arrived have only premise items: <em>Escape from the Planet of the Apes</em>, <em>The Transformers: The Movie</em>, <em>Alien Nation</em>, <em>Timecop</em>, <em>Reign of Fire</em> and <em>Avengers: Endgame</em>.) The headline score counts "came true" as 1, "sort of" as 0.5 and "didn't" as 0, and pools all predictions. Robustness checks drop the films with thin on-screen evidence (lost or barely documented films such as <em>Die Große Wette</em> and <em>The Great Air Robbery</em>), and weight every film equally.</p>
+<h2 id="43-themes-and-catastrophes">4.3 Themes and catastrophes</h2>
+<p>Each prediction is assigned one of eight themes (Table 2). "Gadgets" means communication plus computing/AI. "Catastrophes" are defined by a reproducible keyword list of 42 rows (<code>data/derived/catastrophes.json</code>) covering plagues, wars, collapses and police states. This replaced an earlier, undocumented count of 35 that could not be reproduced.</p>
+<h2 id="44-tone-labels">4.4 Tone labels</h2>
+<p>Two tone labels are recorded. The <strong>Wikipedia label</strong> (<code>tone</code>) is rule-based. A film's Wikipedia short description, lead and categories are scanned for dystopian, post-apocalyptic, totalitarian or utopian wording, giving 131 dystopian, 95 neutral, 3 mixed, 3 unclear and 1 utopian. The <strong>strict label</strong> (<code>tone_strict</code>) counts a film as dystopian only if the society on screen is itself oppressive or collapsed for most of the runtime, giving 116 dystopian and 117 not. They agree on 105 dystopian films; 26 are dystopian only on Wikipedia's labels (e.g. <em>Back to the Future Part II</em>) and 11 only on the strict rule (e.g. <em>The Purge</em>). Strict labels for the 81 arrived films come from the first audit and the scorer, with the scorer's labels checked by the second audit. The remaining 152 strict labels, for films with no scored predictions, are my own labels and are used only for the decade shares.</p>
+<h2 id="45-statistics">4.5 Statistics</h2>
+<p>Tone comparisons use Fisher's exact test on came true versus not. They also use film-level Mann–Whitney and permutation tests (10,000 shuffles, seed 2026), and a theme-adjusted logistic model (GEE, clustered by film). Decade trends use logistic regression on films released from 1950 onwards. I tested a lot of cells, so I treat single results as anecdotes and only lean on ones that survive correction.</p>
+<h1 id="5-checking-my-work">5. Checking my work</h1>
+<p>I checked my own work twice. The notes from both rounds are in the repo.</p>
+<p><strong>Audit v1</strong> (<code>audit_findings.md</code>) was run on the 164-film version, before <em>2009: Lost Memories</em> was moved out. It had four parts.</p>
+<ul>
+<li><strong>Recomputation.</strong> Every published number was recomputed from the files, and every one reproduced exactly. This included the gap arithmetic, the verdict counts, the theme scores and the tone comparison.</li>
+<li><strong>Random re-score.</strong> A random sample of 40 predictions (seed 2026) was re-scored from scratch, and I agreed with <strong>39 of 40</strong> of my original verdicts (97.5%). Random samples flatter agreement, though, because most "didn't" verdicts (dragons, alien invasions) are obvious. So every "came true" and "sort of" row was also reviewed by hand.</li>
+<li><strong>Corrections.</strong> That review fixed <strong>five verdicts that broke the stated rules</strong>. Four were near-misses credited despite arriving late (for example the self-lacing shoes), and one was a world-war forecast that deserved full credit. It also found that <strong>7 of the 30 "hits" already existed at release</strong>, and identified <strong>33 premise devices</strong> to exclude. Two of those premise rows belonged to <em>2009: Lost Memories</em>.</li>
+<li><strong>Net effect.</strong> The corrections pulled in opposite directions and largely cancelled. The audit's cleaned score was 21.4%, and the version adopted in the dataset was 21.5% from 184 scored predictions. Either way, "about 1 in 5" held.</li>
+</ul>
+<p>The audit also introduced the strict tone label (Section 6.7) and tested whether near-future films predicted better (Section 6.6).</p>
+<p><strong>Audit v2</strong> (<code>audit_findings_v2.md</code>) checked, line by line, the 44 prediction rows added for 13 newly scored films in the 233-film update. I stuck with 41 of 44 decisions and made <strong>three changes</strong>:</p>
+<ul>
+<li>the robot companion in <em>The Silent Star</em> went from sort of to didn't;</li>
+<li><em>The 6th Day</em>'s conversational AI dolls went from didn't to sort of;</li>
+<li><em>Rise of the Planet of the Apes</em>'s gene-therapy trial was excluded, because such trials pre-dated the film.</li>
+</ul>
+<p>It also marked one lost film as thin evidence and agreed with all 13 strict tone labels. The headline figures moved by about 0.1 percentage points: from 20.1% to 20.2%, and from 11.3% to 11.4% came true.</p>
+<p>Because it's just me, there's no second-rater reliability statistic (Cohen's or Fleiss' κ). That's the biggest gap in my checking (Section 9).</p>
+<h1 id="6-findings">6. Findings</h1>
+<h2 id="61-how-far-ahead-do-films-look">6.1 How far ahead do films look?</h2>
+<p>The median film is set <strong>34 years</strong> after its release (Figure 2). A quarter of films look 17 years ahead or less, and a quarter look 100 years or more. Only 16% are set within 10 years, while 63% fall within 50 years and 77% within a century. The shortest gap is one year (<em>Terminator: Dark Fate</em>, 2019 → 2020). Excluding the three extreme outliers (both <em>Time Machine</em> films and <em>Vampire Hunter D</em>), the median is 33. Unflagged features alone have a median of 31. So the ambiguous years do not drive the headline.</p>
+<figure><img src="paper/figures/fig_gap_distribution_233.png" alt="Figure 2. Distribution of release-to-setting gaps for all 233 films, split by whether the setting year is flagged. Made for this write-up from films.csv (figures/figgapdistribution233.png)." loading="lazy"><figcaption>Figure 2. Distribution of release-to-setting gaps for all 233 films, split by whether the setting year is flagged. Made for this write-up from <code>films.csv</code> (<code>figures/fig_gap_distribution_233.png</code>).</figcaption></figure>
+
+<p>Medians by release decade swing widely, from 17 (1950s) to 99.5 (1960s), 51 (2000s) and 24 (2010s). Most decades contain fewer than 40 films, so the list shows no clear trend of its own. This contrasts with Wythoff and Leane's much larger film sample (Section 7).</p>
+<h2 id="62-futures-that-have-arrived">6.2 Futures that have arrived</h2>
+<p>Eighty-one films (35%) are set in 2026 or earlier. The share was 42% in the 163-film version. It fell because many of the added films, especially those from Wythoff and Leane's list, are set further ahead. The arrived films lean towards older releases: 64 of the 81 were released before 2000, and only one after 2019 (<em>The Door into Summer</em>, 2021 → 2025). Their median gap is 16 years, against 34 for the whole list. This happens by construction: a 1990s film can be scored only if it looked a short way ahead. Fifteen of the 81 have flagged years, <em>Metropolis</em> among them.</p>
+<h2 id="63-how-much-came-true">6.3 How much came true?</h2>
+<p>Of the 220 scored predictions, <strong>25 came true (11.4%), 39 came true in part (17.7%) and 156 did not (70.9%)</strong>. Counting partial hits as half, the score is <strong>44.5 out of 220, or 20.2%</strong>: about 1 in 5. Only about 1 in 9 came true outright.</p>
+<p>Table 3. Overall accuracy, sliced a few different ways.</p>
+<table>
+<thead>
+<tr>
+<th>Version</th>
+<th>Predictions</th>
+<th>Score (sort of = ½)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All scored predictions</td>
+<td>220</td>
+<td>20.2%</td>
+</tr>
+<tr>
+<td>Excluding the 20 thin-evidence films</td>
+<td>190</td>
+<td>21.8%</td>
+</tr>
+<tr>
+<td>Each of 75 films weighted equally</td>
+<td>75 films</td>
+<td>16.9%</td>
+</tr>
+<tr>
+<td>Counting things that came true by 2026 (audit v1, earlier version)</td>
+<td>182</td>
+<td>about 27%</td>
+</tr>
+</tbody>
+</table>
+<p>The film-equal figure is lower because a few well-documented films contribute many predictions and most of the hits. Thirty-three films score zero.</p>
+<h2 id="64-which-kinds-of-prediction-came-true">6.4 Which kinds of prediction came true?</h2>
+<p>Theme matters a great deal (Figure 3). <strong>Communication</strong> technology scores 57.5% (n = 20, from 10 films; 45% came true outright): video calls, flat wall-mounted screens, giant video billboards, a global network. <strong>Computing and AI</strong> score 30.3% (n = 33). Every other theme is below the overall average. Society and politics is lowest, at 10.9% across the largest group (n = 64). Transport scores 12.5% on only 12 predictions. Taken together, <strong>gadget forecasts (communication plus computing/AI) score 40.6%</strong> (n = 53).</p>
+<figure><img src="paper/figures/fig_theme_scores.png" alt="Figure 3. Score (sort of = half) and share that came true outright, by theme, for the 220 scored predictions. Made for this write-up from predictions.csv (figures/figthemescores.png)." loading="lazy"><figcaption>Figure 3. Score (sort of = half) and share that came true outright, by theme, for the 220 scored predictions. Made for this write-up from <code>predictions.csv</code> (<code>figures/fig_theme_scores.png</code>).</figcaption></figure>
+
+<p>The contrast with catastrophe is stark. <strong>Only 2 of the 42 catastrophe forecasts came true</strong>: plagues, wars, collapses and police states. Both are interwar films foreseeing a new world war around 1940: <em>High Treason</em> (1929) and <em>Men Must Fight</em> (1933). After a Holm correction for eight comparisons, only communication stands out (audit v1); the order of the rest is noise. Communication is also concentrated: about half of its predictions in the audited version came from the three headline films.</p>
+<p>Several hits are extrapolations of trends already visible at release. <em>Johnny Mnemonic</em>'s global internet (1995 → 2021) and <em>Death Race</em>'s pay-per-view livestreaming (2008 → 2020) are examples. Two of the most quoted hits are coincidences, not foresight (Section 8). <em>The Great Air Robbery</em>'s night air mail (1919 → 1925) is a modest but genuine forecast from a lost film, and it is the only transport prediction that came true.</p>
+<h2 id="65-headline-films">6.5 Headline films</h2>
+<p>Table 4. Scores for the three most-discussed films.</p>
+<table>
+<thead>
+<tr>
+<th>Film</th>
+<th>Release → setting</th>
+<th>Came true</th>
+<th>Sort of</th>
+<th>Didn't</th>
+<th>Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>2001: A Space Odyssey</em></td>
+<td>1968 → 2001</td>
+<td>2</td>
+<td>3</td>
+<td>5</td>
+<td>35%</td>
+</tr>
+<tr>
+<td><em>Blade Runner</em></td>
+<td>1982 → 2019</td>
+<td>3</td>
+<td>1</td>
+<td>5</td>
+<td>39%</td>
+</tr>
+<tr>
+<td><em>Back to the Future Part II</em></td>
+<td>1989 → 2015</td>
+<td>4</td>
+<td>1</td>
+<td>5</td>
+<td>45%</td>
+</tr>
+</tbody>
+</table>
+<p>All three are well above the average, mostly because of communication and computing forecasts. <em>Back to the Future Part II</em>'s 45% counts near-misses as half and applies the strict date rule. The film was quoted at 50% before the first audit removed the late-arriving self-lacing shoes.</p>
+<h2 id="66-does-look-ahead-predict-accuracy">6.6 Does look-ahead predict accuracy?</h2>
+<p>Near-future films might be expected to do better, with less time for the world to diverge. The first audit, on the 164-film version, found a weak tendency the other way. Predictions from films set 1–10 years ahead scored about 15% (58 predictions from 22 films) and those 11–20 years ahead 18%. Films set 21–30 years ahead scored 29%, and those 31 or more years ahead 26%. The film-level correlation was positive but not conventionally significant (Spearman ρ = 0.21, p = 0.08). An unadjusted model gave an odds ratio of 1.33 per e-fold of gap (p = 0.04), which fell to 1.20 (p = 0.19) once theme was controlled for. The likely reason is composition: very-near-future films are mostly premise thrillers (<em>Predator 2</em>, <em>Alien Nation</em>, <em>Strange Days</em>) with few technology forecasts. The fair summary is a weak tendency for longer-gap films to score higher, which largely disappears once theme is accounted for. It is not "no link", and it is not evidence that looking further ahead makes a film more accurate. This analysis has not yet been rerun on the 233-film version.</p>
+<h2 id="67-tone-and-accuracy">6.7 Tone and accuracy</h2>
+<p>Do bleak futures predict better? On Wikipedia's labels, dystopian and non-dystopian films score almost the same: <strong>20.2% versus 20.3%</strong> (Fisher p = 0.52). On the strict labels, dystopian films do slightly worse: <strong>18.6% versus 21.6%</strong> (p = 0.14), and 7.8% versus 14.4% came true outright (Figure 4, panel A). None of the specifications in <code>tone_analysis.md</code> reaches significance (all p ≥ 0.10). Every odds ratio is below one, but with only 25 outright hits, only a difference of about 15 points or more could have been detected. Tone is also badly confounded with theme. Non-dystopian films make 40 of the 42 space predictions, and dystopian films make 43 of the 64 society/politics predictions. Theme, not tone, is what drives accuracy (panel B).</p>
+<figure><img src="charts/tone_vs_accuracy.png" alt="Figure 4. Tone and accuracy (tonevsaccuracy.png). A: accuracy by Wikipedia and strict tone labels. B: score by theme and strict tone. C: share of dystopian films by release decade under both labels." loading="lazy"><figcaption>Figure 4. Tone and accuracy (<code>tone_vs_accuracy.png</code>). A: accuracy by Wikipedia and strict tone labels. B: score by theme and strict tone. C: share of dystopian films by release decade under both labels.</figcaption></figure>
+
+<p>Panel C addresses a related claim, that dystopias are on the rise. Under Wikipedia's labels the dystopian share rises significantly from 1950 (odds ratio 1.19 per decade, p = 0.01), peaking at <strong>86% in the 2010s</strong>. Under the strict rule there is no significant trend (odds ratio 1.08, p = 0.24), and the 2010s figure is <strong>63%</strong>, about the same as the 1970s (61%) and 2000s (61%). The 2020s, from 2020 to 2026, are 52–54% on either rule. Much of the apparent rise looks like Wikipedia's categories being more generous to recent films. This bears on comparisons with The Pudding's finding of rising dystopia (Chang, 2024), which used a different sample and LLM-assisted coding. My data neither confirm nor contradict it once the labelling is tightened.</p>
+<h1 id="7-comparison-with-wythoff-and-leane-2025">7. Comparison with Wythoff and Leane (2025)</h1>
+<p>Wythoff and Leane's dataset was compared with a snapshot of my list taken when it had 163 films (<code>wythoff_leane/findings.md</code>). Fuzzy title matching, reviewed by hand, found <strong>146 of the 163 films (90%)</strong> in their data. Of the 17 not matched, most were released after or near their February 2025 scrape, or are early and obscure.</p>
+<p><strong>Dating agreement.</strong> For the 146 shared films, <strong>132 setting years agree and 14 disagree</strong> (<code>match_mine_vs_wl.csv</code>). Six of the disagreements come from method. Wythoff and Leane take the median of a multi-year span where I take the main year: they give <em>Things to Come</em> 1967 where I give 2036, and <em>Bicentennial Man</em> 2048 where I give 2005. Five are source conflicts I had already flagged, such as <em>The Fifth Element</em>. Three appear to be errors in their data when checked against current Wikipedia: <em>Code 46</em>, <em>Bigbug</em> and <em>Death Race</em>. None of my values was changed on the strength of their data alone. <em>Star Trek: First Contact</em> and <em>Bicentennial Man</em> remain genuine judgement calls.</p>
+<p><strong>Selection, not dating.</strong> Their films have a median gap of <strong>25 years</strong> (n = 959, the films with a year), against <strong>32</strong> for my 163-film snapshot (Mann–Whitney p = 0.0013). Thirty-five per cent of their films are set within 10 years, against 14% of mine (Figure 5). But on the 146 shared films the medians are almost identical: <strong>30.5 (mine) and 31 (theirs)</strong>. The difference is therefore one of selection. Wythoff and Leane include any narrative work set a year or more ahead, including superhero, horror and comedy films nudged a year into the future, which I leave out as not really "future" science fiction. Their films whose first genre is science fiction have a median of 42.</p>
+<figure><img src="charts/chart2_gap_distribution_mine_vs_wl.png" alt="Figure 5. Gap distribution, my 163-film snapshot against Wythoff and Leane&#x27;s films (wythoffleane/chart2gapdistributionminevswl.png). Note that this comparison predates the expansion to 233 films." loading="lazy"><figcaption>Figure 5. Gap distribution, my 163-film snapshot against Wythoff and Leane's films (<code>wythoff_leane/chart2_gap_distribution_mine_vs_wl.png</code>). Note that this comparison predates the expansion to 233 films.</figcaption></figure>
+
+<p><strong>Is screen science fiction looking nearer?</strong> Wythoff and Leane's films offer a test of Hollinger's (2006) near-future hypothesis. The median gap for their films falls from <strong>50 years in the 1960s</strong> to 40 in the 1970s, 27 in the 2000s, <strong>17 in the 2010s</strong> and 10.5 in 2020–24 (Figure 6). Their novels show no such trend: the median goes from 56 to 62 when comparing 2005–24 with 1950–2004 (p = 0.49). For films the trend is clear overall (medians of 32 versus 18, p ≈ 6×10⁻⁶), but it weakens sharply for films whose first Wikidata genre is science fiction (49 to 32.5, <strong>p = 0.053</strong>). So a good part of the near-future shift in film reflects a changing mix of genres, with more franchise films set a year or two ahead, rather than science fiction film-makers imagining less far ahead. My own list, built to exclude such films, shows no clear trend (Figure 6, yellow line; Figure 7).</p>
+<figure><img src="charts/chart1_median_gap_by_decade.png" alt="Figure 6. Median gap by release decade for Wythoff and Leane&#x27;s films, novels and all media, and for my 163-film snapshot (wythoffleane/chart1mediangapbydecade.png)." loading="lazy"><figcaption>Figure 6. Median gap by release decade for Wythoff and Leane's films, novels and all media, and for my 163-film snapshot (<code>wythoff_leane/chart1_median_gap_by_decade.png</code>).</figcaption></figure>
+
+<figure><img src="charts/chart3_near_future_share_by_decade.png" alt="Figure 7. Share of works set within 10 years of release, by decade, in Wythoff and Leane&#x27;s films, novels and television (wythoffleane/chart3nearfuturesharebydecade.png)." loading="lazy"><figcaption>Figure 7. Share of works set within 10 years of release, by decade, in Wythoff and Leane's films, novels and television (<code>wythoff_leane/chart3_near_future_share_by_decade.png</code>).</figcaption></figure>
+
+<p>The projects complement each other: theirs is broad, multi-media and inclusive; mine is film-only, multinational and stricter about "future", and adds scores and tone labels. Their open data also supplied 51 of the 70 films added in the 233-film update, each re-sourced.</p>
+<h1 id="8-discussion">8. Discussion</h1>
+<h2 id="81-gadgets-right-catastrophes-wrong">8.1 Gadgets right, catastrophes wrong</h2>
+<p>The clearest pattern is that films did best on incidental technology and worst on the dramatic premise. The video call in a <em>Blade Runner</em> phone booth, the flat screen on a wall in <em>Back to the Future Part II</em>, and the seat-back screens on <em>2001</em>'s shuttle are background details, and they came true. The plagues, nuclear wars and police states that give dystopian films their plots almost never did: 2 of 42. Background gadgets tend to extrapolate technology film-makers could already see: Larson (2008) found on-screen computers reflect their own day, and Kirby (2010) shows consultants place some such details deliberately. Catastrophes are narrative devices, chosen to drive a story rather than to estimate a probability. There is also an asymmetry in the scoring. A catastrophe forecast is all or nothing, while a gadget forecast can earn half credit for a partial or niche version.</p>
+<h2 id="82-wheres-my-flying-car-function-versus-form">8.2 Where's my flying car? Function versus form</h2>
+<p>The gap between release and setting is one axis along which a future can be right or wrong. A second axis, suggested by the scored data but not measured by it, is <strong>function versus form</strong>. Science fiction often got the <em>function</em> right and the <em>form</em> wrong, or right only for a lucky few. So the question is not only <em>when</em> an imagined future arrives, but <em>for whom</em>.</p>
+<p>The examples below are illustrative and qualitative. They are not results from the scored data.</p>
+<ul>
+<li><strong>Tablets.</strong> <em>2001</em> (1968) shows flat tablet computers. In <code>predictions.csv</code> they are scored <em>didn't</em>, because no such device was in use by 2001. Tablets of that kind became a mass product only with the iPad in 2010.</li>
+<li><strong>Gesture interfaces.</strong> <em>Minority Report</em> (2002) made gesture-driven screens famous years before touch interfaces became ordinary. Its setting year, 2054, has not arrived, so it is not scored here.</li>
+<li><strong>Video calls.</strong> Video communication was a staple of Star Trek and other screen futures decades before video calling became routine for ordinary people. My data credit it where a film's year had arrived: <em>Metropolis</em>'s video telephone, the phone-booth call in <em>Blade Runner</em> and the home video call in <em>Back to the Future Part II</em> all count as came true. <em>2001</em>'s call home from a space station earns only <em>sort of</em>, because by 2001 video calls were possible but uncommon.</li>
+<li><strong>Handheld scanners.</strong> The tricorder-style scanner is a similar case. The function has arrived in diffused form, as smartphones with GPS and sensors in almost every pocket, rather than as a single specialist instrument.</li>
+</ul>
+<p>In each case the capability eventually arrived. The question of when it arrived depends on whether one counts a demonstrator, a luxury product or something in everyone's hands.</p>
+<p>Flying cars are the emblem of this problem. Every flying-car forecast in the scored data is a miss. That includes <em>Die Große Wette</em>'s air cabs, <em>Just Imagine</em>'s personal aircraft, <em>The Shining Future</em>'s family helicopter, <em>Blade Runner</em>'s spinners and <em>Back to the Future Part II</em>'s flying cars. Yet the thing itself is no longer purely fictional. Electric vertical take-off and landing (eVTOL) air taxis and Jetsons-style demonstrators fly today, but they remain pre-production. In March 2026, for example, Joby Aviation announced that it had begun flight testing its first FAA-conforming aircraft as a step towards type certification, with commercial service still ahead (Joby Aviation, 2026). Futures like this can arrive early as demonstrations and then stall on certification, cost and scale. That is one reason why the size of the gap alone is a poor guide to accuracy. Consistent with Section 6.6, longer-gap films scored somewhat higher on the earlier version (p = 0.08), but the tendency faded once theme was taken into account. What a film forecasts matters more than how far ahead it looks.</p>
+<h2 id="83-coincidence-is-not-foresight">8.3 Coincidence is not foresight</h2>
+<p>Two of the most shared "hits" need care. In <em>Akira</em> (1988 → 2019), Neo-Tokyo is preparing for the 2020 Olympics. Tokyo did win the 2020 Games in 2013, and they were then postponed. But Tokyo had hosted the Games in 1964 and had bid repeatedly. My notes record that the viral claim that <em>Akira</em> "predicted the pandemic" was debunked by PolitiFact. In <em>The Running Man</em> (1987 → 2017), a broadcaster digitally fakes its contestants' faces and deaths. The term "deepfake" was coined in late 2017, which is a neat coincidence. But digital face replacement predates 2017, and no broadcaster has faked a death. These items are scored as on-screen claims, but they should be presented as coincidences with good stories behind them, not as evidence that film-makers can see the future.</p>
+<h2 id="84-selection-scoring-and-small-numbers">8.4 Selection, scoring and small numbers</h2>
+<p>Three points qualify every number above. <strong>Selection bias</strong>: the scored films name a year, that year has passed, and they are famous enough to be documented, so they skew towards the 1950s to 1990s and towards short gaps. <strong>Just me</strong>: choosing which details count as predictions is subjective, as the 33 premise rows and 7 pre-existing "hits" found by the first audit show. <strong>Small groups</strong>: most cells hold fewer than 30 predictions and dozens of comparisons were run; only the communication result survives correction.</p>
+<h1 id="9-what-this-cant-tell-you">9. What this can't tell you</h1>
+<ul>
+<li><strong>Not a random sample.</strong> The list is curated from well-known, dated films, largely via English Wikipedia (223 of 233 source links). It includes non-English-language films, but discovery still runs through English-language sources.</li>
+<li><strong>Ambiguous years.</strong> Forty-nine setting years are flagged, and 15 of the 81 films whose year has arrived (14 of the 75 scored) have flagged years. Different defensible choices would change individual gaps and, for films near 2026 such as <em>Metropolis</em>, whether a film can be scored at all.</li>
+<li><strong>Scope.</strong> The list excludes alternate history, which I've parked for later in <code>alt_history_candidates.csv</code>; television series, held in <code>series/</code>, which I may score later; and films without a sourced year (e.g. <em>Forbidden Planet</em>).</li>
+<li><strong>Just me.</strong> I scored everything and checked it twice myself; nobody else scored it blind, so there's no agreement statistic. The 39-of-40 agreement comes from a sample in which most items were easy.</li>
+<li><strong>The strict date rule.</strong> Judging by the setting year penalises forecasts that arrived slightly late. The more lenient "came true by 2026" measure is reported only from the earlier audit.</li>
+<li><strong>Tone labels.</strong> The 152 strict labels for unscored films rest on my own judgement, and the Wikipedia labels are coarse. One looks plainly wrong: <em>One Hundred Years Ahead</em> sits in a dystopian category but shows a bright 2124.</li>
+<li><strong>Analyses on earlier versions.</strong> The gap-versus-accuracy analysis and the comparison with Wythoff and Leane were run on the 164- and 163-film versions and have not been recomputed for 233 films.</li>
+<li><strong>Catastrophe definition.</strong> The 2-of-42 figure depends on a keyword definition.</li>
+</ul>
+<h1 id="10-data-availability">10. Data availability</h1>
+<p>All files are in this repository (see <code>findings/README.md</code> for where each one sits):</p>
+<ul>
+<li><code>films.csv</code>: 233 films, the codebook in Table 1.</li>
+<li><code>predictions.csv</code>: 266 prediction rows for listed films (220 scored), the codebook in Table 2. It also contains 2 excluded rows for <em>2009: Lost Memories</em>.</li>
+<li><code>alt_history_candidates.csv</code>: alternate-history films set aside to look at later.</li>
+<li><code>stats_summary.md</code>: headline statistics. <code>tone_analysis.md</code> and <code>tone_vs_accuracy.png</code>: tone analysis.</li>
+<li><code>audit_findings.md</code> and <code>audit/</code>: audit v1, with scripts and the 40-row re-score sample. <code>audit_findings_v2.md</code>: audit v2.</li>
+<li><code>data/rejected_candidates.csv</code>: the 25 rejected candidates and reasons. <code>data/derived/catastrophes.json</code>: the catastrophe keyword list.</li>
+<li><code>timeline.png</code> and <code>timeline.pdf</code>: the main infographic. <code>series/series_timeline.png</code>: the separate chart of 94 television series.</li>
+<li><code>wythoff_leane/</code>: <code>findings.md</code>, <code>match_mine_vs_wl.csv</code>, <code>add_candidates_shortlist.csv</code>, <code>stats.json</code> and charts 1–3. Wythoff and Leane's data are CC BY 4.0, with the citation below.</li>
+<li><code>literature.md</code>: the related-work search.</li>
+<li><code>paper/</code>: this write-up (<code>paper.md</code>, <code>paper.docx</code>, <code>paper.pdf</code>) and <code>src/make_paper_figs.py</code>, which draws Figures 2 and 3 and the infographic crop.</li>
+</ul>
+<p>Data: Wythoff &amp; Leane (2025), Post45 Data Collective, doi:10.18737/552626, CC BY 4.0.</p>
+<h1 id="references">References</h1>
+<p>Artut, S. (2017). Addressing a future with data visualization on science fiction movies: dystopia or utopia. <em>Turkish Online Journal of Design, Art and Communication</em>, 7(4), 626–633. <a href="https://doi.org/10.7456/10704100/009">https://doi.org/10.7456/10704100/009</a></p>
+<p>Arb Research. Scoring the Big 3's predictive performance. <a href="https://arbresearch.com/files/big_three.pdf">https://arbresearch.com/files/big_three.pdf</a></p>
+<p>Bina, O., Mateus, S., Pereira, L. &amp; Caffa, A. (2017). The future imagined: exploring fiction as a means of reflecting on today's Grand Societal Challenges and tomorrow's options. <em>Futures</em>, 86, 166–184. <a href="https://doi.org/10.1016/j.futures.2016.05.009">https://doi.org/10.1016/j.futures.2016.05.009</a></p>
+<p>Chang, A. (2024, July). Who killed the world? <em>The Pudding</em>. <a href="https://pudding.cool/2024/07/scifi/">https://pudding.cool/2024/07/scifi/</a></p>
+<p>Coston, P. SciFi movies about a future year. <a href="https://patcoston.com/home/futuremovie.aspx">https://patcoston.com/home/futuremovie.aspx</a></p>
+<p>Glow New Media. The sci-fi timeline. <a href="https://www.glow-internet.com/infographics/the-sci-fi-timeline">https://www.glow-internet.com/infographics/the-sci-fi-timeline</a></p>
+<p>Hollinger, V. (2006). Stories about the future: from patterns of expectation to pattern recognition. <em>Science Fiction Studies</em>, 33(3), 452–472. <a href="https://doi.org/10.1525/sfs.33.3.452">https://doi.org/10.1525/sfs.33.3.452</a></p>
+<p>io9 / Gizmodo, Newitz, A. et al., chart by S. Fox (2012). A chart that reveals how science fiction futures changed over time. <a href="https://gizmodo.com/a-chart-that-reveals-how-science-fiction-futures-change-5911520">https://gizmodo.com/a-chart-that-reveals-how-science-fiction-futures-change-5911520</a></p>
+<p>Joby Aviation (2026, 11 March). Joby's first FAA-conforming aircraft takes flight [press release]. <a href="https://www.jobyaviation.com/news/joby-s-first-faa-conforming-aircraft-takes-flight">https://www.jobyaviation.com/news/joby-s-first-faa-conforming-aircraft-takes-flight</a></p>
+<p>Jordan, P., Mubin, O., Obaid, M. &amp; Silva, P. A. (2018). Exploring the referral and usage of science fiction in HCI literature. In <em>Design, User Experience, and Usability</em> (HCII 2018), LNCS, 19–38. <a href="https://doi.org/10.1007/978-3-319-91803-7_2">https://doi.org/10.1007/978-3-319-91803-7_2</a></p>
+<p>Kirby, D. (2010). The future is now: diegetic prototypes and the role of popular films in generating real-world technological development. <em>Social Studies of Science</em>, 40(1), 41–70. <a href="https://doi.org/10.1177/0306312709338325">https://doi.org/10.1177/0306312709338325</a></p>
+<p>Larson, J. (2008). Limited imagination: depictions of computers in science fiction film. <em>Futures</em>, 40(3), 293–299. <a href="https://doi.org/10.1016/j.futures.2007.08.015">https://doi.org/10.1016/j.futures.2007.08.015</a></p>
+<p>Meth, D. Futuristic movie timeline (Pop-Cultural Charts #6). <a href="https://www.tumblr.com/danmeth/124593834/futuristicmovietimeline">https://www.tumblr.com/danmeth/124593834/futuristicmovietimeline</a></p>
+<p>Russell, D. M. &amp; Yarosh, S. (2018). Can we look to science fiction for innovation in HCI? <em>Interactions</em>, 25(2), 36–40. <a href="https://doi.org/10.1145/3178552">https://doi.org/10.1145/3178552</a></p>
+<p>Shedroff, N. &amp; Noessel, C. (2012). <em>Make It So: Interaction Design Lessons from Science Fiction</em>. Rosenfeld Media. ISBN 978-1-933820-98-9. <a href="https://rosenfeldmedia.com/books/make-it-so/">https://rosenfeldmedia.com/books/make-it-so/</a></p>
+<p>Wikipedia. List of films set in the future by date of setting. <a href="https://en.wikipedia.org/wiki/List_of_films_set_in_the_future_by_date_of_setting">https://en.wikipedia.org/wiki/List_of_films_set_in_the_future_by_date_of_setting</a></p>
+<p>Wikipedia. List of stories set in a future now past. <a href="https://en.wikipedia.org/wiki/List_of_stories_set_in_a_future_now_past">https://en.wikipedia.org/wiki/List_of_stories_set_in_a_future_now_past</a></p>
+<p>Wythoff, G. &amp; Leane, T. (2025, 24 June). Time horizons of futuristic fiction. <em>Post45 Data Collective</em>. <a href="https://doi.org/10.18737/552626">https://doi.org/10.18737/552626</a> · <a href="https://data.post45.org/posts/futuristic-fiction/">https://data.post45.org/posts/futuristic-fiction/</a> · data: <a href="https://github.com/Post45-Data-Collective/data/tree/main/futuristic_fiction">https://github.com/Post45-Data-Collective/data/tree/main/futuristic_fiction</a></p>
+<p>Xu, W., Kotecha, M. C., Padilla, D., Jimenez, J. &amp; McAdams, D. A. (2021). Quantifying the predictive abilities of speculative fiction: a feasibility study. In <em>ASME IDETC/CIE 2021, 33rd International Conference on Design Theory and Methodology</em>, Vol. 6. <a href="https://doi.org/10.1115/DETC2021-68723">https://doi.org/10.1115/DETC2021-68723</a></p>
+</article>
+</main>
+<footer class="site"><div class="wrap">Andi Sharkey, 2026. Data and text <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>; code MIT.
+Comparison data: Wythoff &amp; Leane (2025), Post45 Data Collective, <a href="https://doi.org/10.18737/552626">doi:10.18737/552626</a> (CC BY 4.0).</div></footer>
+
+</body>
+</html>
